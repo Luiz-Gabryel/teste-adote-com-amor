@@ -20,15 +20,14 @@ document
   .addEventListener("click", mostrarLogin);
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ---------- LOGIN ----------
 const formLogin = document.getElementById("form-login");
+
 formLogin.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const email = document.getElementById("login-email").value;
+  const email = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-senha").value;
-  console.log("Teste de envio de formulário de login");
-  console.log("Email:", email);
-  console.log("Password:", password);
-
   // objeto do supabase para devolver somende o erro de data e error, await pra ele esperar receber esse dado
   const { data, error } = await supabaseClient.auth.signInWithPassword({
     email: email,
@@ -44,35 +43,33 @@ formLogin.addEventListener("submit", async (event) => {
   }
 });
 
+// ---------- CADASTRO ----------
 const formCadastro = document.getElementById("form-cadastro");
 
 formCadastro.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const nome = document.getElementById("cad-nome").value;
-  const email = document.getElementById("cad-email").value;
+  const nome = document.getElementById("cad-nome").value.trim();
+  const email = document.getElementById("cad-email").value.trim();
   const senha = document.getElementById("cad-senha").value;
   const confirmaSenha = document.getElementById("cad-senha-confirma").value;
 
   if (senha !== confirmaSenha) {
-    console.log("As senhas nao estao batendo.");
+    alert("As senhas não estão batendo.");
     return;
-  } else {
-    console.log("As senhas estao batendo.");
   }
-  console.log("Testando envio de furmalário de cadastro");
 
   const { data, error } = await supabaseClient.auth.signUp({
     email: email,
     password: senha,
+    options: { data: { nome: nome } },
   });
 
   if (error) {
     console.error("Cadastro falhou:", error.message);
+    alert("Cadastro falhou: " + error.message);
   } else {
     console.log("Cadastro bem-sucedido:", data);
-    console.log("Nome do usuário:", nome);
-    console.log("Email do usuário:", email);
-    console.log("Senha do usuário:", senha);
-    alert("Cadastro criado pro usuario: " + nome + " com email: " + email);
+    alert("Cadastro criado! Se pedir, confirme o e-mail antes de logar.");
+    mostrarLogin();
   }
 });
