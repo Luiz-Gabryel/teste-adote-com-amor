@@ -98,5 +98,6 @@ btnGoogle.addEventListener("click", async () => {
 supabaseClient.auth.onAuthStateChange((event, session) => {
   if (event === "SIGNED_IN") {
     console.log("Logado como:", session.user.email);
+    window.location.href = "home.html"; // página que abre depois do login
   }
 });
