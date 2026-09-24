@@ -1,11 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
-</head>
-<body>
-    <p>teste</p>
-</body>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+  </head>
+  <body>
+    <h1>Você está logado!</h1>
+    <p id="info"></p>
+    <button id="btn-sair">Sair</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script>
+      const supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY,
+      );
+
+      async function iniciar() {
+        const {
+          data: { session },
+        } = await supabaseClient.auth.getSession();
+
+        // se não estiver logado, volta para o login
+        if (!session) {
+          window.location.href = "Auth.html";
+          return;
+        }
+
+        document.getElementById("info").textContent =
+          "Email: " + session.user.email;
+      }
+
+      document
+        .getElementById("btn-sair")
+        .addEventListener("click", async () => {
+          await supabaseClient.auth.signOut();
+          window.location.href = "Auth.html";
+        });
+
+      iniciar();
+    </script>
+  </body>
 </html>
