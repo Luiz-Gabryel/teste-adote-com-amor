@@ -39,7 +39,7 @@ formLogin.addEventListener("submit", async (event) => {
     alert("Erro ao fazer login: " + error.message);
   } else {
     console.log("Login bem-sucedido:", data);
-    alert("Login bem-sucedido!");
+    window.location.href = "home.html";
   }
 });
 
@@ -93,4 +93,10 @@ btnGoogle.addEventListener("click", async () => {
     btnGoogle.disabled = false;
   }
   // Se deu certo, o navegador é redirecionado para o Google automaticamente.
+});
+
+supabaseClient.auth.getSession().then(({ data: { session } }) => {
+  if (session) {
+    window.location.href = "home.html";
+  }
 });
