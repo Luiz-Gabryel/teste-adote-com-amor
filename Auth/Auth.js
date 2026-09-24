@@ -69,7 +69,34 @@ formCadastro.addEventListener("submit", async (event) => {
     alert("Cadastro falhou: " + error.message);
   } else {
     console.log("Cadastro bem-sucedido:", data);
-    alert("Cadastro criado! Se pedir, confirme o e-mail antes de logar.");
+    alert("Cadastro criado!");
     mostrarLogin();
+  }
+});
+
+const btnGoogle = document.getElementById("btn-google-login");
+const msgLogin = document.getElementById("message-login");
+
+btnGoogle.addEventListener("click", async () => {
+  btnGoogle.disabled = true;
+  msgLogin.textContent = "";
+
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: window.location.origin + "/home.html", // troque pela página que abre depois do login
+    },
+  });
+
+  if (error) {
+    msgLogin.textContent = "Erro ao entrar com Google: " + error.message;
+    btnGoogle.disabled = false;
+  }
+  // Se deu certo, o navegador é redirecionado para o Google automaticamente.
+});
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_IN") {
+    console.log("Logado como:", session.user.email);
   }
 });
