@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!faixa || slides.length === 0) return;
 
-  const INTERVALO = 4000; // tempo entre trocas, em milissegundos (4000 = 4s)
+  const INTERVALO = 4000; 
   let atual = 0;
   let timer = null;
 
@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Troca automática =====
   function proximoAuto() {
-    // no último slide, volta para o primeiro
     irPara(atual === slides.length - 1 ? 0 : atual + 1);
   }
 
@@ -89,19 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   faixa.addEventListener("scroll", atualizar, { passive: true });
 
-  // pausa quando o mouse está em cima ou o dedo está tocando
   carrossel.addEventListener("mouseenter", pararAutoplay);
   carrossel.addEventListener("mouseleave", iniciarAutoplay);
   carrossel.addEventListener("touchstart", pararAutoplay, { passive: true });
   carrossel.addEventListener("touchend", iniciarAutoplay, { passive: true });
 
-  // pausa quando a aba do navegador não está visível
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) pararAutoplay();
     else iniciarAutoplay();
   });
 
-  // ao redimensionar, mantém o slide atual alinhado
   window.addEventListener("resize", () => {
     faixa.scrollTo({ left: atual * faixa.clientWidth, behavior: "auto" });
     atualizar();
@@ -110,9 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizar();
   iniciarAutoplay();
 });
-
-import { supabase } from "/Auth/config.js";
-
+const supabase = window.supabaseClient;
 const formContato = document.getElementById("formContato");
 const mensagem = document.getElementById("mensagem");
 
