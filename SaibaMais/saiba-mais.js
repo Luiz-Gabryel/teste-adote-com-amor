@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!faixa || slides.length === 0) return;
 
-  const INTERVALO = 4000; 
+  const INTERVALO = 4000;
   let atual = 0;
   let timer = null;
 
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizar();
   iniciarAutoplay();
 });
-const supabase = window.supabaseClient;
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const formContato = document.getElementById("formContato");
 const mensagem = document.getElementById("mensagem");
 
@@ -125,17 +125,15 @@ formContato.addEventListener("submit", async (event) => {
   const email = document.getElementById("email").value;
   const whatsapp = document.getElementById("whatsapp").value;
 
-  const { error } = await supabase
-    .from("contatos")
-    .insert({
-      user_id: user ? user.id : null,
-      nome: nome,
-      cpf: cpf,
-      rg: rg,
-      profissao: profissao,
-      email: email,
-      whatsapp: whatsapp,
-    });
+  const { error } = await supabase.from("contatos").insert({
+    user_id: user ? user.id : null,
+    nome: nome,
+    cpf: cpf,
+    rg: rg,
+    profissao: profissao,
+    email: email,
+    whatsapp: whatsapp,
+  });
 
   if (error) {
     console.error(error);
