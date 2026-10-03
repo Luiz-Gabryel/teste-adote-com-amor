@@ -115,21 +115,14 @@ import { supabase } from "/Auth/config.js";
 
 const formContato = document.getElementById("formContato");
 const mensagem = document.getElementById("mensagem");
+
 formContato.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  // Verifica quem está logado
+  // Verifica se existe alguém logado
   const {
     data: { user },
-    error: erroUsuario,
   } = await supabase.auth.getUser();
-
-  if (erroUsuario || !user) {
-    mensagem.textContent =
-      "Você precisa estar logado para enviar o formulário.";
-    mensagem.style.color = "red";
-    return;
-  }
 
   const nome = document.getElementById("nome").value;
   const cpf = document.getElementById("cpf").value;
@@ -138,15 +131,17 @@ formContato.addEventListener("submit", async (event) => {
   const email = document.getElementById("email").value;
   const whatsapp = document.getElementById("whatsapp").value;
 
-  const { error } = await supabase.from("contatos").insert({
-    user_id: user.id,
-    nome: nome,
-    cpf: cpf,
-    rg: rg,
-    profissao: profissao,
-    email: email,
-    whatsapp: whatsapp,
-  });
+  const { error } = await supabase
+    .from("contatos")
+    .insert({
+      user_id: user ? user.id : null,
+      nome: nome,
+      cpf: cpf,
+      rg: rg,
+      profissao: profissao,
+      email: email,
+      whatsapp: whatsapp,
+    });
 
   if (error) {
     console.error(error);
