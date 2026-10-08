@@ -21,7 +21,7 @@
 
   const MENU = {
     // para onde ir depois de clicar em SAIR
-    aposSair: "/Catalogo-Geral/home.html",
+    aposSair: "/index.html",
 
     // usados só se a página não tiver carregado o Supabase / config.js
     supabaseCdn: "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
@@ -46,12 +46,12 @@
       },
       {
         texto: "ADOTE",
-        href: "/Catalogo-Geral/home.html#adote",
+        href: "/adote.html",
       },
       {
         tipo: "logo",
-        href: "/Catalogo-Geral/home.html",
-        src: "/img/LogoBranca.png",
+        href: "/index.html",
+        src: "/assets/img/ui/logo.png",
         alt: "Adote Com Amor, página inicial",
       },
       {
@@ -60,7 +60,7 @@
       },
       {
         texto: "SAIBA MAIS",
-        href: "/SaibaMais/saiba-mais.html",
+        href: "/saiba-mais.html",
       },
     ],
   };

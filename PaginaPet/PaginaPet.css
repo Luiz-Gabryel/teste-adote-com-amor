@@ -99,6 +99,25 @@ h1 {
   border-radius: 16px;
 }
 
+.pet__voltar {
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+.btn--voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  line-height: 1.2;
+  min-height: 48px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(232, 121, 50, 0.15);
+}
+
 .btn:hover {
   background: #cf6a29;
 }
