@@ -25,17 +25,11 @@ img {
 }
 
 body {
-  width: 100%;
-  min-height: 100vh;
+  display: block;
   font-family: "Lora", serif;
   color: var(--texto);
-  line-height: 1.45;
-
-  background-color: var(--fundo);
-  background-image: var(--imagem-fundo);
-  background-repeat: repeat;
-  background-position: center top;
-  background-size: 500px auto;
+  line-height: 1.55;
+  background: #fff;
 }
 
 a {
@@ -206,4 +200,24 @@ section p {
   h1 {
     font-size: 32px;
   }
+}
+
+.pagina-pet {
+  position: relative;
+  isolation: isolate;
+
+  width: min(1200px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 40px;
+  align-items: start;
+
+  background-color: #fffdf9;
+  background-image: var(--imagem-fundo);
+  background-repeat: repeat;
+  background-position: center top;
+  background-size: 400px auto;
 }
