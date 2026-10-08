@@ -1,10 +1,13 @@
 :root {
-  --laranja: #e27c3a;
+  --laranja: #e87932;
   --laranja-claro: #f7d3a3;
   --laranja-tag: #f0b36c;
-  --azul-tag: #78bfea;
+  --azul-tag: #72bfea;
   --marinho: #0b1a2b;
-  --texto: #1c1c1c;
+  --texto: #171717;
+  --fundo: #fffdf9;
+
+  --imagem-fundo: url("/img/fundo-caes.png");
 }
 
 * {
@@ -22,11 +25,17 @@ img {
 }
 
 body {
-  display: block;
+  width: 100%;
+  min-height: 100vh;
   font-family: "Lora", serif;
   color: var(--texto);
-  line-height: 1.55;
-  background: #fff;
+  line-height: 1.45;
+
+  background-color: var(--fundo);
+  background-image: var(--imagem-fundo);
+  background-repeat: repeat;
+  background-position: center top;
+  background-size: 500px auto;
 }
 
 a {
@@ -72,7 +81,9 @@ main {
 }
 
 h1 {
-  font: 700 40px "Montserrat", sans-serif;
+  font:
+    700 40px "Montserrat",
+    sans-serif;
   color: var(--marinho);
 }
 
@@ -88,7 +99,9 @@ h1 {
   padding: 14px 40px;
   background: var(--laranja);
   color: #fff;
-  font: 700 22px "Montserrat", sans-serif;
+  font:
+    700 22px "Montserrat",
+    sans-serif;
   border-radius: 16px;
 }
 
@@ -112,7 +125,9 @@ h1 {
 .tag {
   padding: 6px 14px;
   border-radius: 12px;
-  font: 600 14px "Montserrat", sans-serif;
+  font:
+    600 14px "Montserrat",
+    sans-serif;
 }
 
 .azul {
@@ -146,7 +161,9 @@ h1 {
 }
 
 h2 {
-  font: 700 26px "Montserrat", sans-serif;
+  font:
+    700 26px "Montserrat",
+    sans-serif;
   margin-bottom: 6px;
 }
 
