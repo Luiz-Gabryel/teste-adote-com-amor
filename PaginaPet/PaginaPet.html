@@ -13,20 +13,11 @@
     />
 
     <link rel="stylesheet" href="./PaginaPet.css" />
+    <link rel="stylesheet" href="/config/Nav.css" />
   </head>
 
   <body>
-    <nav class="menu" aria-label="Principal">
-      <a href="/Auth/Auth.html">ENTRAR</a>
-      <a href="/home.html#adote">ADOTE</a>
-
-      <a href="/" class="logo">
-        <img src="/img/LogoBranca.png" alt="Adote Com Amor, página inicial" />
-      </a>
-
-      <a href="#">DOE AQUI</a>
-      <a href="#">SAIBA MAIS</a>
-    </nav>
+    <header data-menu-site></header>
 
     <main>
       <div>
@@ -62,8 +53,10 @@
       </div>
     </main>
 
-    <script src="../DadosPet/dadosPets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/Auth/config.js"></script>
     <script src="PaginaPet.js"></script>
     <script src="vlibras.js"></script>
+    <script src="/config/Nav.js"></script>
   </body>
 </html>

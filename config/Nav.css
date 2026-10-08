@@ -1,0 +1,44 @@
+[data-menu-site] .menu {
+  --laranja: #e3793a;
+  --texto: #fff;
+
+  width: min(650px, 100%);
+  margin: 0 auto;
+  background: var(--laranja);
+  border-radius: 999px;
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+[data-menu-site] .menu a {
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  padding: 6px 10px;
+}
+
+[data-menu-site] .menu a:hover,
+[data-menu-site] .menu a:focus-visible,
+[data-menu-site] .menu a[aria-current="page"] {
+  text-decoration: underline;
+}
+
+[data-menu-site] .menu .logo img {
+  height: 28px;
+  width: auto;
+}
+
+@media (max-width: 800px) {
+  [data-menu-site] .menu {
+    padding: 8px 12px;
+  }
+
+  [data-menu-site] .menu a {
+    font-size: 0.7rem;
+    padding: 6px 4px;
+  }
+}

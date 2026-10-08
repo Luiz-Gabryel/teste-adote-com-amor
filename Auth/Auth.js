@@ -111,7 +111,11 @@ btnGoogle.addEventListener("click", async () => {
   msgLogin.textContent = "";
 
   // aviso de redirecionament
-  mostrarMensagem(msgLogin, "Você será redirecionado para o Google de forma segura.", "info");
+  mostrarMensagem(
+    msgLogin,
+    "Você será redirecionado para o Google de forma segura.",
+    "info",
+  );
 
   const redirectURL = new URL("home.html", window.location.href).href;
   const { error } = await supabaseClient.auth.signInWithOAuth({
@@ -120,7 +124,11 @@ btnGoogle.addEventListener("click", async () => {
   });
 
   if (error) {
-    mostrarMensagem(msgLogin, "Erro ao entrar com Google: " + error.message, "erro");
+    mostrarMensagem(
+      msgLogin,
+      "Erro ao entrar com Google: " + error.message,
+      "erro",
+    );
     btnGoogle.disabled = false;
   }
 });
@@ -128,7 +136,6 @@ btnGoogle.addEventListener("click", async () => {
 // ========== VERIFICAÇÃO DE SESSÃO ==========
 supabaseClient.auth.getSession().then(({ data: { session } }) => {
   if (session) {
-    // ✅ Validação de origem segura
     if (window.location.protocol === "https:") {
       window.location.href = "home.html";
     }
