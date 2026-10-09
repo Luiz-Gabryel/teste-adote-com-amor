@@ -137,7 +137,10 @@
   padding: 0.9rem 1.1rem;
   background: #a8d8f8;
   border-radius: 1rem;
-  font: 600 0.75rem/1.45 "Montserrat", system-ui, sans-serif;
+  font:
+    600 0.75rem/1.45 "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 /* Propósitos */
@@ -165,7 +168,10 @@
 }
 
 .proposito__item p {
-  font: 0.8rem/1.5 "Montserrat", system-ui, sans-serif;
+  font:
+    0.8rem/1.5 "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 /* Conheça nossos pets */
@@ -216,7 +222,10 @@
 
 .faq__topo p {
   max-width: 28rem;
-  font: 0.85rem/1.5 "Montserrat", system-ui, sans-serif;
+  font:
+    0.85rem/1.5 "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .faq__topo .btn {
@@ -232,7 +241,10 @@
   background: #e57b36;
   border-radius: 0.5rem;
   color: #000;
-  font: 600 0.95rem "Montserrat", system-ui, sans-serif;
+  font:
+    600 0.95rem "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .faq summary {
@@ -255,6 +267,7 @@
 
 .faq details[open] {
   background: #f9e3c5;
+  transition: 1s;
 }
 
 .faq details[open] summary::after {
@@ -263,18 +276,25 @@
 
 .faq__resposta {
   padding: 0 1.2rem 1.2rem;
-  font: 500 0.95rem/1.6 "Lora", Georgia, serif;
+  font:
+    500 0.95rem/1.6 "Lora",
+    Georgia,
+    serif;
 }
 
 /* Doe também */
 .doe {
   padding: 4rem 0 3rem;
   text-align: center;
-  background: url("../assets/img/fundos/fundo-pegadas.svg") center top / 100% auto no-repeat;
+  background: url("../assets/img/fundos/fundo-pegadas.svg") center top / 100%
+    auto no-repeat;
 }
 
 .doe h2 {
-  font: 700 clamp(3rem, 9vw, 5.5rem) / 1 "Fredoka", "Trebuchet MS", sans-serif;
+  font:
+    700 clamp(3rem, 9vw, 5.5rem) / 1 "Fredoka",
+    "Trebuchet MS",
+    sans-serif;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #e57b36;
@@ -302,49 +322,7 @@
   margin-top: -2.4rem;
 }
 
-/* ==========================================================================
-   HERO LARANJA (adote, categoria e saiba mais)
-   ========================================================================== */
-.hero-aviso {
-  position: relative;
-  min-height: 24rem;
-  margin-top: 6rem;
-  padding: 2.5rem;
-  background: #e57b36;
-  color: #fff;
-  border-radius: 2rem;
-}
 
-.hero-aviso__texto {
-  max-width: 50%;
-}
-
-.hero-aviso__texto h1 {
-  margin-top: 0.8rem;
-  font-weight: 700;
-}
-
-.hero-aviso__texto p {
-  margin-bottom: 1rem;
-  font-size: 0.92rem;
-  line-height: 1.55;
-}
-
-.hero-aviso .tag {
-  color: #1b1b1b;
-}
-
-/* O recorte ancora na base do card e "vaza" para fora pelo topo */
-.hero-aviso__img {
-  position: absolute;
-  right: 1.5rem;
-  bottom: 0;
-  width: auto;
-  height: 125%;
-  max-width: 52%;
-  object-fit: contain;
-  object-position: right bottom;
-}
 
 /* Seletor de categorias */
 .categorias {
@@ -385,7 +363,10 @@
    ========================================================================== */
 .titulo-categoria {
   margin-bottom: 1rem;
-  font: 600 clamp(2.5rem, 7vw, 4rem) / 1 "Fredoka", "Trebuchet MS", sans-serif;
+  font:
+    600 clamp(2.5rem, 7vw, 4rem) / 1 "Fredoka",
+    "Trebuchet MS",
+    sans-serif;
   text-align: center;
   text-transform: uppercase;
   color: #e57b36;
@@ -427,7 +408,10 @@
 }
 
 .pet__info h3 {
-  font: 600 2rem/1.1 "Fredoka", "Trebuchet MS", sans-serif;
+  font:
+    600 2rem/1.1 "Fredoka",
+    "Trebuchet MS",
+    sans-serif;
 }
 
 .pet__tags {
@@ -493,7 +477,10 @@
 
 .card h3 {
   margin: 0.6rem 0 0.3rem;
-  font: 700 1.7rem "Montserrat", system-ui, sans-serif;
+  font:
+    700 1.7rem "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 /* ==========================================================================
@@ -518,7 +505,10 @@
 }
 
 .avaliacoes h2 {
-  font: 600 clamp(1.8rem, 4vw, 2.4rem) / 1.1 "Fredoka", "Trebuchet MS", sans-serif;
+  font:
+    600 clamp(1.8rem, 4vw, 2.4rem) / 1.1 "Fredoka",
+    "Trebuchet MS",
+    sans-serif;
   text-align: center;
   color: #e57b36;
 }
@@ -545,7 +535,10 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font: 600 0.85rem "Montserrat", system-ui, sans-serif;
+  font:
+    600 0.85rem "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .avaliacao__avatar {
@@ -563,7 +556,10 @@
 
 .avaliacao p {
   margin: 0.6rem 0;
-  font: 600 0.78rem/1.5 "Montserrat", system-ui, sans-serif;
+  font:
+    600 0.78rem/1.5 "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .avaliacao__patas {
@@ -638,7 +634,10 @@
   background: #70bdee;
   color: #fff;
   border-radius: 1rem;
-  font: 700 1.6rem "Montserrat", system-ui, sans-serif;
+  font:
+    700 1.6rem "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .passo:nth-child(2) .passo__numero {
@@ -693,7 +692,10 @@
   padding: 0.7rem 1rem;
   background: #70bdee;
   border-radius: 0.8rem;
-  font: 600 0.95rem/1.35 "Montserrat", system-ui, sans-serif;
+  font:
+    600 0.95rem/1.35 "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .porque__legenda::before {
@@ -701,7 +703,9 @@
   position: absolute;
   top: -1.9rem;
   left: -0.9rem;
-  font: 700 4.5rem/1 "Fredoka", sans-serif;
+  font:
+    700 4.5rem/1 "Fredoka",
+    sans-serif;
   color: #e57b36;
 }
 
@@ -743,7 +747,10 @@
   background: #f2edea;
   border: 2px solid transparent;
   border-radius: 0.3rem;
-  font: 0.9rem "Montserrat", system-ui, sans-serif;
+  font:
+    0.9rem "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .form input:user-invalid {
@@ -753,7 +760,10 @@
 .form__msg {
   min-height: 1.5em;
   color: #1e7a46;
-  font: 600 0.95rem "Montserrat", system-ui, sans-serif;
+  font:
+    600 0.95rem "Montserrat",
+    system-ui,
+    sans-serif;
 }
 
 .contato__foto {
@@ -828,24 +838,6 @@
     max-height: 14rem;
   }
 
-  .hero-aviso {
-    min-height: 0;
-    margin-top: 4rem;
-    padding: 1.5rem 1.5rem 0;
-  }
-
-  .hero-aviso__texto {
-    max-width: none;
-  }
-
-  .hero-aviso__img {
-    position: static;
-    height: auto;
-    max-width: 80%;
-    max-height: 18rem;
-    margin: -1rem auto 0;
-    object-position: center bottom;
-  }
 
   .categorias {
     gap: 0.8rem;

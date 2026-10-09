@@ -22,35 +22,7 @@
     <div class="fundo-topo">
       <header class="topo">
         <div class="container">
-          <nav class="nav" aria-label="Principal">
-            <button
-              class="nav__toggle"
-              type="button"
-              aria-expanded="false"
-              aria-controls="menu"
-              aria-label="Abrir menu"
-            >
-              ☰
-            </button>
-            <div class="nav__links" id="menu">
-              <a href="Auth/Auth.html">Entrar</a>
-              <a href="adote.html">Adote</a>
-              <a
-                class="nav__logo"
-                href="index.html"
-                aria-label="Audote com amor, página inicial"
-              >
-                <img
-                  src="assets/img/ui/logo.png"
-                  alt=""
-                  width="900"
-                  height="382"
-                />
-              </a>
-              <a href="/CadastrarPet/CadastroPet.html">Doe aqui</a>
-              <a href="saiba-mais.html">Saiba mais</a>
-            </div>
-          </nav>
+          <nav class="menu" id="menu"></nav>
         </div>
       </header>
 
@@ -345,78 +317,10 @@
       </div>
     </main>
 
-    <footer class="rodape">
-      <div class="container rodape__container">
-        <img
-          class="rodape__filhote"
-          src="assets/img/ui/filhote.png"
-          alt=""
-          width="420"
-          height="420"
-        />
-        <div class="rodape__caixa">
-          <div class="rodape__marca">
-            <img
-              class="rodape__logo"
-              src="assets/img/ui/logo.png"
-              alt="Audote com amor"
-              width="900"
-              height="382"
-            />
-            <small class="rodape__slogan"
-              >Amor que faz o coração aquecer. Adote com Amor!</small
-            >
-          </div>
-          <div class="rodape__contato">
-            <h2>Fale conosco</h2>
-            <ul>
-              <li>
-                <a href="tel:+5511900000000">
-                  <img
-                    src="assets/img/icones/telefone.svg"
-                    alt=""
-                    width="24"
-                    height="24"
-                  />
-                  (11) 90000-0000
-                </a>
-              </li>
-              <li>
-                <a href="mailto:autodecomamor@gmail.com">
-                  <img
-                    src="assets/img/icones/email.svg"
-                    alt=""
-                    width="24"
-                    height="24"
-                  />
-                  autodecomamor@gmail.com
-                </a>
-              </li>
-              <li>
-                <a href="https://instagram.com/autodecomamor" rel="noopener">
-                  <img
-                    src="assets/img/icones/instagram.svg"
-                    alt=""
-                    width="24"
-                    height="24"
-                  />
-                  @autodecomamor
-                </a>
-              </li>
-            </ul>
-          </div>
-          <img
-            class="rodape__pata"
-            src="assets/img/ui/pata.png"
-            alt=""
-            width="336"
-            height="435"
-          />
-        </div>
-      </div>
-    </footer>
+    <footer class="rodape" id="rodape"></footer>
 
-    <script src="js/navbar.js"></script>
     <script src="js/imagens.js"></script>
+    <script src="/config/Nav.js"></script>
+    <script src="/config/Footer.js"></script>
   </body>
 </html>

@@ -22,67 +22,12 @@
     <div class="fundo-topo">
       <header class="topo">
         <div class="container">
-          <nav class="nav" aria-label="Principal">
-            <button
-              class="nav__toggle"
-              type="button"
-              aria-expanded="false"
-              aria-controls="menu"
-              aria-label="Abrir menu"
-            >
-              ☰
-            </button>
-            <div class="nav__links" id="menu">
-              <a href="Auth/Auth.html">Entrar</a>
-              <a href="adote.html">Adote</a>
-              <a
-                class="nav__logo"
-                href="index.html"
-                aria-label="Audote com amor, página inicial"
-              >
-                <img
-                  src="assets/img/ui/logo.png"
-                  alt=""
-                  width="900"
-                  height="382"
-                />
-              </a>
-              <a href="index.html#doe">Doe aqui</a>
-              <a href="saiba-mais.html" aria-current="page">Saiba mais</a>
-            </div>
-          </nav>
+          <nav class="menu" id="menu"></nav>
         </div>
       </header>
 
       <div class="container">
-        <section class="hero-aviso" aria-labelledby="aviso">
-          <div class="hero-aviso__texto">
-            <h1 id="aviso">Antes de mais nada, é importante que saiba!</h1>
-            <p>
-              A adoção responsável de Pets vai muito além de um impulso ou uma
-              surpresa. Um animal de estimação não é um presente que pode ser
-              trocado ou descartado, é um companheiro para a vida toda.
-            </p>
-            <p>
-              Ao adotar um Pet, um amigo, um parceiro, você está assumindo o
-              compromisso de oferecer carinho, cuidado e um ambiente seguro para
-              um ser que já enfrentou o abandono e agora busca um recomeço.
-            </p>
-            <p>
-              Se você é residente das zonas Norte, Sul ou Oeste de São Paulo, da
-              Baixada ou Capital e está pensando em como adotar um Pet, respire
-              fundo e leia com carinho: essa decisão deve ser feita com o
-              coração e com consciência.
-            </p>
-          </div>
-          <img
-            class="hero-aviso__img"
-            src="assets/img/ui/hero-pets.png"
-            alt="Um cachorro e um gato sentados lado a lado"
-            width="814"
-            height="800"
-          />
-        </section>
+        <div data-hero-aviso></div>
       </div>
     </div>
 
@@ -290,79 +235,12 @@
       </div>
     </main>
 
-    <footer class="rodape">
-      <div class="container rodape__container">
-        <img
-          class="rodape__filhote"
-          src="assets/img/ui/filhote.png"
-          alt=""
-          width="420"
-          height="420"
-        />
-        <div class="rodape__caixa">
-          <div class="rodape__marca">
-            <img
-              class="rodape__logo"
-              src="assets/img/ui/logo.png"
-              alt="Audote com amor"
-              width="900"
-              height="382"
-            />
-            <small class="rodape__slogan"
-              >Amor que faz o coração aquecer. Adote com Amor!</small
-            >
-          </div>
-          <div class="rodape__contato">
-            <h2>Fale conosco</h2>
-            <ul>
-              <li>
-                <a href="tel:+5511900000000">
-                  <img
-                    src="assets/img/icones/telefone.svg"
-                    alt=""
-                    width="24"
-                    height="24"
-                  />
-                  (11) 90000-0000
-                </a>
-              </li>
-              <li>
-                <a href="mailto:autodecomamor@gmail.com">
-                  <img
-                    src="assets/img/icones/email.svg"
-                    alt=""
-                    width="24"
-                    height="24"
-                  />
-                  autodecomamor@gmail.com
-                </a>
-              </li>
-              <li>
-                <a href="https://instagram.com/autodecomamor" rel="noopener">
-                  <img
-                    src="assets/img/icones/instagram.svg"
-                    alt=""
-                    width="24"
-                    height="24"
-                  />
-                  @autodecomamor
-                </a>
-              </li>
-            </ul>
-          </div>
-          <img
-            class="rodape__pata"
-            src="assets/img/ui/pata.png"
-            alt=""
-            width="336"
-            height="435"
-          />
-        </div>
-      </div>
-    </footer>
+    <footer class="rodape" id="rodape"></footer>
 
-    <script src="js/navbar.js"></script>
     <script src="js/imagens.js"></script>
     <script src="js/formulario.js"></script>
+    <script src="/config/Nav.js"></script>
+    <script src="/config/Footer.js"></script>
+    <script src="/config/Hero-Aviso.js" defer></script>
   </body>
 </html>

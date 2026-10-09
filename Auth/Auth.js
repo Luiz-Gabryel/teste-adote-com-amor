@@ -65,7 +65,7 @@ formLogin.addEventListener("submit", async (event) => {
     // Pequeno atraso + validação de origem (evita falso-positivo de phishing)
     setTimeout(() => {
       if (origemSeguraParaAuth()) {
-        window.location.href = "home.html";
+        window.location.href = "../index.html";
       } else {
         mostrarMensagem(msgLogin, "Acesso seguro obrigatório.", "erro");
       }
@@ -126,7 +126,7 @@ btnGoogle.addEventListener("click", async () => {
     "info",
   );
 
-  const redirectURL = new URL("home.html", window.location.href).href;
+  const redirectURL = new URL("../index.html", window.location.href).href;
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: "google",
     options: { redirectTo: redirectURL },
@@ -145,6 +145,6 @@ btnGoogle.addEventListener("click", async () => {
 // ========== VERIFICAÇÃO DE SESSÃO ==========
 supabaseClient.auth.getSession().then(({ data: { session } }) => {
   if (session && origemSeguraParaAuth()) {
-    window.location.href = "home.html";
+    window.location.href = "../index.html";
   }
 });
