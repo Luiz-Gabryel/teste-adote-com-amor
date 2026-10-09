@@ -215,14 +215,15 @@ function mostrarPet(pet) {
   document.getElementById("petCuidados").textContent = pet.cuidados;
 
   // Define a cor da etiqueta de sexo.
+
   const sexo = String(pet.sexo || "").toLowerCase();
 
-  const classeSexo = sexo.includes("macho")
-    ? "macho"
-    : sexo.includes("fêmea") || sexo.includes("femea")
-      ? "femea"
-      : sexo.includes("casal")
-        ? "casal"
+  const classeSexo = sexo.includes("casal")
+    ? "casal"
+    : sexo.includes("macho")
+      ? "macho"
+      : sexo.includes("fêmea") || sexo.includes("femea")
+        ? "femea"
         : "escuro";
 
   const tags = [

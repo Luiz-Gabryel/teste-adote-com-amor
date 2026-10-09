@@ -42,8 +42,10 @@
       {
         texto: "ENTRAR",
         href: "/Auth/Auth.html",
-        logado: { texto: "MINHA CONTA", acao: "sair" },
-        // logado: { texto: "OLÁ, {nome}", acao: "sair" },
+        logado: {
+          texto: "MINHA CONTA",
+          href: "/Auth/Auth.html",
+        },
       },
       {
         texto: "ADOTE",
@@ -62,6 +64,12 @@
       {
         texto: "SAIBA MAIS",
         href: "/saiba-mais.html",
+      },
+
+      {
+        texto: "SAIR",
+        acao: "sair",
+        visivel: "logado",
       },
     ],
   };
@@ -230,7 +238,7 @@
   */
   const ativarEfeitoRolagem = (barra) => {
     const reduzirMovimento = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     );
     const DISTANCIA = 180; /* px de rolagem até a barra sumir por completo */
     let aguardando = false;
@@ -252,7 +260,7 @@
         aguardando = true;
         window.requestAnimationFrame(atualizar);
       },
-      { passive: true }
+      { passive: true },
     );
 
     atualizar();
