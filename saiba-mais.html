@@ -17,18 +17,22 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/componentes.css" />
     <link rel="stylesheet" href="css/paginas.css" />
-  
-<script>
-(function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;
-    t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];
-    y.parentNode.insertBefore(t,y);
-})(window,document,"clarity","script","yv8exlboqb");
-</script>
 
-</head>
+    <script>
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "yv8exlboqb");
+    </script>
+  </head>
   <body class="tema-saiba">
     <div class="fundo-topo">
       <header class="topo">
@@ -102,45 +106,30 @@
           </ol>
         </section>
 
-        <section class="secao" aria-labelledby="porque-titulo">
-          <div class="secao__cabecalho">
-            <span class="tag tag--azul">
-              <img
-                class="tag__icone"
-                src="assets/img/icones/patinha.svg"
-                alt=""
-                width="18"
-                height="18"
-              />
-              <span id="porque-titulo">Por que adotar um pet?</span>
-            </span>
+        <section class="por-que-adotar">
+          <div class="tag-adotar">
+            🐾
+            <span>Por que Adotar um pet?</span>
           </div>
 
-          <div class="porque">
-            <figure class="porque__item">
-              <img
-                class="porque__img"
-                src="assets/img/pets/image 19 (2).png"
-                alt="Papagaio verde"
-                data-opcional
-                loading="lazy"
-              />
-              <figcaption class="porque__legenda">
-                Você salva uma vida e ganha um amigo fiel!
-              </figcaption>
-            </figure>
-            <figure class="porque__item">
-              <img
-                class="porque__img"
-                src="assets/img/pets/image 19 (1).png"
-                alt="Peixe betta azul e laranja"
-                data-opcional
-                loading="lazy"
-              />
-              <figcaption class="porque__legenda">
-                Contribui para reduzir o número de animais abandonados
-              </figcaption>
-            </figure>
+          <div class="carrossel" aria-roledescription="carrossel">
+            <div class="carrossel-faixa">
+              <div class="slide">
+                <div class="texto-caixa texto-esquerda">
+                  <img src="/img/papagaio.png" alt="Papagaio" />
+                  <p>Você salva uma vida e ganha um amigo fiel!</p>
+                </div>
+              </div>
+
+              <div class="slide">
+                <div class="texto-caixa texto-direita">
+                  <img src="/img/peixe.png" alt="Peixe beta" />
+                  <p>Contribui para reduzir o número de animais abandonados</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="carrossel-dots"></div>
           </div>
         </section>
 
@@ -253,5 +242,6 @@
     <script src="/config/Nav.js"></script>
     <script src="/config/Footer.js"></script>
     <script src="/config/Hero-Aviso.js" defer></script>
+    <script src="/js/saiba-mais.js"></script>
   </body>
 </html>

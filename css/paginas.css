@@ -322,8 +322,6 @@
   margin-top: -2.4rem;
 }
 
-
-
 /* Seletor de categorias */
 .categorias {
   display: flex;
@@ -654,70 +652,6 @@
   line-height: 1.5;
 }
 
-.porque {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  margin-top: 3rem;
-}
-
-.porque__item {
-  position: relative;
-  height: 15rem;
-  margin-top: 4.5rem;
-  background: #f5cfa0;
-  border-radius: 2rem;
-}
-
-.porque__item:nth-child(2) {
-  background: #cce6f8;
-}
-
-.porque__img {
-  position: absolute;
-  left: 1.5rem;
-  bottom: 1.2rem;
-  width: auto;
-  height: 19rem;
-  max-width: 50%;
-  object-fit: contain;
-  object-position: left bottom;
-}
-
-.porque__legenda {
-  position: absolute;
-  top: 2.2rem;
-  right: -1.5rem;
-  max-width: 13rem;
-  padding: 0.7rem 1rem;
-  background: #70bdee;
-  border-radius: 0.8rem;
-  font:
-    600 0.95rem/1.35 "Montserrat",
-    system-ui,
-    sans-serif;
-}
-
-.porque__legenda::before {
-  content: "\201C";
-  position: absolute;
-  top: -1.9rem;
-  left: -0.9rem;
-  font:
-    700 4.5rem/1 "Fredoka",
-    sans-serif;
-  color: #e57b36;
-}
-
-.porque__item:nth-child(2) .porque__legenda {
-  background: #e57b36;
-  color: #fff;
-}
-
-.porque__item:nth-child(2) .porque__legenda::before {
-  color: #70bdee;
-}
-
 /* Contato */
 .contato {
   display: grid;
@@ -838,7 +772,6 @@
     max-height: 14rem;
   }
 
-
   .categorias {
     gap: 0.8rem;
     padding: 0.8rem 1rem;
@@ -896,5 +829,183 @@
 @media (max-width: 36rem) {
   .grade {
     grid-template-columns: 1fr;
+  }
+}
+
+.por-que-adotar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 48px 12px 64px;
+}
+
+.tag-adotar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 20px;
+  background: #cfe8fa;
+  border: 1px solid #6fbbee;
+  border-radius: 999px;
+  color: #1a1a1a;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ---- .carrossel cll ---- */
+
+.carrossel {
+  position: relative;
+  width: min(100%, 560px);
+}
+
+.carrossel-faixa {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.carrossel-faixa::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  padding: 0 8px;
+}
+
+.carrossel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.carrossel-dots button {
+  width: 24px;
+  height: 24px;
+  padding: 7px;
+  border: none;
+  border-radius: 50%;
+  background: #cfe8fa;
+  background-clip: content-box;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+}
+
+.carrossel-dots button.ativo {
+  background-color: #e3793a;
+  transform: scale(1.25);
+}
+
+.texto-caixa {
+  position: relative;
+  container-type: inline-size;
+}
+
+.texto-caixa img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.texto-esquerda {
+  width: 68%;
+}
+
+.texto-direita {
+  width: 82%;
+}
+
+.texto-esquerda img {
+  width: 88%;
+  margin-inline: auto;
+}
+
+.texto-direita img {
+  width: 100%;
+}
+
+/* ---- Texto dentro dos balões (nao esta responsivo)---- */
+
+.texto-caixa p {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 4% 0 5%;
+  color: #1a1a1a;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Balão azul do papagaio */
+
+.texto-esquerda p {
+  left: 50%;
+  top: 32.6%;
+  width: 50%;
+  height: 21.3%;
+  font-size: clamp(0.62rem, 3.3cqw, 1rem);
+}
+
+/* Balão laranja do peixe */
+
+.texto-direita p {
+  left: 58.2%;
+  top: 42.6%;
+  width: 41.8%;
+  height: 23%;
+  font-size: clamp(0.58rem, 2.8cqw, 1rem);
+  line-height: 1.2;
+}
+
+@media (max-width: 400px) {
+  .tag-adotar {
+    font-size: 0.85rem;
+    padding: 5px 14px;
+  }
+}
+
+/* ---- PC: lado a lado ---- */
+
+@media (min-width: 801px) {
+  .carrossel {
+    width: min(100%, 1000px);
+  }
+
+  .carrossel-faixa {
+    overflow: visible;
+    scroll-snap-type: none;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .slide {
+    flex: 1 1 0; /* peixe e papagaio ocupar metade */
+    padding: 0;
+    scroll-snap-align: none;
+  }
+
+  .texto-esquerda,
+  .texto-direita {
+    width: 100%;
+  }
+
+  .carrossel-dots {
+    display: none;
   }
 }

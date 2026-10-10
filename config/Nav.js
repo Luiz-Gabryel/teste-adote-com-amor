@@ -1,43 +1,28 @@
+
 /* ==========================================================
    MENU DO SITE (um arquivo só para todas as páginas)
    ----------------------------------------------------------
    COMO USAR EM UMA PÁGINA:
-     1) Onde ficava o menu, coloque só isto:
-            <nav class="menu" id="menu"></nav>
-        (também funciona: <header data-menu-site></header>)
+   1. Onde ficava o menu, coloque:
+      <nav class="menu" id="menu"></nav>
 
-     2) No fim do <body>, depois dos outros scripts da página:
-            <script src="/js/nav.js"></script>
+   2. No fim do body, carregue:
+      <script src="/config/Nav.js"></script>
 
-   COMO TROCAR TEXTOS E LINKS:
-     Mexa somente na parte "CONFIGURAÇÃO" abaixo.
-
-   O visual do menu fica no arquivo:
-            fica no FINAL deste mesmo arquivo (const CSS),
-            não precisa de arquivo .css separado.
+   O visual do menu fica no final deste arquivo (const CSS).
 ========================================================== */
 
 (() => {
-  // ================= CONFIGURAÇÃO mexer somente nessa parte =================
+  // ================= CONFIGURAÇÃO =================
 
   const MENU = {
-    // para onde ir depois de clicar em SAIR
     aposSair: "/index.html",
 
-    // usados só se a página não tiver carregado o Supabase / config.js
-    supabaseCdn: "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
+    // Supabase
+    supabaseCdn:
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
     configPath: "/Auth/config.js",
 
-    // Itens do menu, na ordem em que aparecem.
-    //
-    //  texto    : o que aparece escrito
-    //  href     : para onde leva
-    //  logado   : o que MUDA quando a pessoa está logada
-    //             (pode trocar texto, href e/ou acao)
-    //  acao     : "sair" faz logout ao clicar
-    //  visivel  : "todos" (padrão), "logado" ou "deslogado"
-    //
-    //  Dentro de "texto" dá para usar {nome} = nome da pessoa logada.
     itens: [
       {
         texto: "ENTRAR",
@@ -65,7 +50,6 @@
         texto: "SAIBA MAIS",
         href: "/saiba-mais.html",
       },
-
       {
         texto: "SAIR",
         acao: "sair",
@@ -74,17 +58,18 @@
     ],
   };
 
-  // ================= FIM DA CONFIGURAÇÃO =================
-
-  /* ---------- Supabase (só para saber se a pessoa está logada) ---------- */
+  // ================= SUPABASE =================
 
   const carregarScript = (src) =>
     new Promise((ok, erro) => {
-      const s = document.createElement("script");
-      s.src = src;
-      s.onload = ok;
-      s.onerror = () => erro(new Error("Falha ao carregar " + src));
-      document.head.appendChild(s);
+      const script = document.createElement("script");
+
+      script.src = src;
+      script.onload = ok;
+      script.onerror = () =>
+        erro(new Error("Falha ao carregar " + src));
+
+      document.head.appendChild(script);
     });
 
   let promessaCliente = null;
@@ -96,21 +81,35 @@
       if (!window.supabase?.createClient) {
         await carregarScript(MENU.supabaseCdn);
       }
+
       if (
         typeof SUPABASE_URL === "undefined" ||
         typeof SUPABASE_KEY === "undefined"
       ) {
         await carregarScript(MENU.configPath);
       }
-      return window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      if (!window.clienteSupabase) {
+        window.clienteSupabase = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_KEY,
+        );
+      }
+
+      return window.clienteSupabase;
     })();
 
-    /* Se falhar, deixa tentar de novo da próxima vez */
     promessaCliente.catch(() => {
       promessaCliente = null;
     });
+
     return promessaCliente;
   };
+
+  // Disponibiliza a função para outros scripts
+  window.obterClienteSupabase = obterCliente;
+
+  // ================= SAIR DA CONTA =================
 
   const sair = async () => {
     try {
@@ -119,32 +118,45 @@
     } catch (erro) {
       console.warn("[menu] erro ao sair:", erro);
     }
+
     location.href = MENU.aposSair;
   };
 
-  /* Primeiro nome da pessoa logada (vale para login com Google também) */
+  // Primeiro nome da pessoa logada.
   const nomeDe = (usuario) => {
     const meta = usuario?.user_metadata || {};
+
     const completo =
-      meta.full_name || meta.name || usuario?.email?.split("@")[0] || "";
+      meta.full_name ||
+      meta.name ||
+      usuario?.email?.split("@")[0] ||
+      "";
+
     return completo.trim().split(" ")[0];
   };
 
-  /* ---------- Itens do menu ---------- */
+  // ================= ITENS DO MENU =================
 
-  const semIndex = (caminho) => caminho.replace(/\/index\.html$/, "/");
+  const semIndex = (caminho) =>
+    caminho.replace(/\/index\.html$/, "/");
 
   const marcarPaginaAtual = (area) => {
     const atual = semIndex(location.pathname);
+
     area.querySelectorAll("a[href]").forEach((a) => {
-      if (a.classList.contains("nav-site__logo") || a.dataset.acao) return;
+      if (
+        a.classList.contains("nav-site__logo") ||
+        a.dataset.acao
+      ) {
+        return;
+      }
+
       if (semIndex(a.pathname) === atual) {
         a.setAttribute("aria-current", "page");
       }
     });
   };
 
-  /* Desenha os itens conforme a pessoa está logada (sessao) ou não (null) */
   const montarItens = (area, sessao) => {
     const logado = Boolean(sessao);
     const nome = logado ? nomeDe(sessao.user) : "";
@@ -152,30 +164,47 @@
     area.replaceChildren();
 
     MENU.itens.forEach((base) => {
-      const item = logado ? { ...base, ...base.logado } : base;
+      const item = logado
+        ? { ...base, ...base.logado }
+        : base;
+
       const visivel = item.visivel || "todos";
+
       if (visivel === "logado" && !logado) return;
       if (visivel === "deslogado" && logado) return;
 
       const a = document.createElement("a");
-      if (item.href) a.href = item.href;
+
+      if (item.href) {
+        a.href = item.href;
+      }
 
       if (item.tipo === "logo") {
         a.className = "nav-site__logo";
-        a.setAttribute("aria-label", item.alt || "Página inicial");
+        a.setAttribute(
+          "aria-label",
+          item.alt || "Página inicial",
+        );
+
         const img = new Image();
+
         img.src = item.src;
         img.alt = "";
         img.width = 900;
         img.height = 382;
+
         a.appendChild(img);
       } else {
-        /* textContent: o nome vem do usuário, nunca como HTML */
-        a.textContent = (item.texto || "").replaceAll("{nome}", nome);
+        // O nome do usuário é inserido como texto, não como HTML.
+        a.textContent = (item.texto || "").replaceAll(
+          "{nome}",
+          nome,
+        );
       }
 
       if (item.acao === "sair") {
         a.dataset.acao = "sair";
+
         a.addEventListener("click", (evento) => {
           evento.preventDefault();
           sair();
@@ -188,75 +217,103 @@
     marcarPaginaAtual(area);
   };
 
-  /* Descobre se há sessão e atualiza o menu (também em login/logout) */
-  const areasDosMenus = []; /* um item por menu na página */
+  // ================= SESSÃO DO USUÁRIO =================
+
+  const areasDosMenus = [];
   let sessaoAtual = null;
   let acompanhando = false;
 
   const atualizarTodos = (sessao) => {
     sessaoAtual = sessao;
-    areasDosMenus.forEach((area) => montarItens(area, sessao));
+
+    areasDosMenus.forEach((area) => {
+      montarItens(area, sessao);
+    });
   };
 
   const acompanharSessao = (area) => {
     areasDosMenus.push(area);
 
-    /* Já está acompanhando: este menu só pega a sessão atual */
     if (acompanhando) {
       montarItens(area, sessaoAtual);
       return;
     }
+
     acompanhando = true;
 
     obterCliente()
       .then(async (cliente) => {
         const { data } = await cliente.auth.getSession();
+
         atualizarTodos(data.session);
+
         cliente.auth.onAuthStateChange((_evento, sessao) => {
           atualizarTodos(sessao);
         });
       })
       .catch((erro) => {
-        console.warn("[menu] sem Supabase, mostrando menu deslogado:", erro);
+        acompanhando = false;
+
+        console.warn(
+          "[menu] sem Supabase, mostrando menu deslogado:",
+          erro,
+        );
       });
   };
 
-  /* ---------- Menu mobile ---------- */
+  // ================= MENU MOBILE =================
 
   const ativarMenuMobile = (barra) => {
     const botao = barra.querySelector(".nav-site__toggle");
+
     botao?.addEventListener("click", () => {
-      const aberto = barra.classList.toggle("nav-site__barra--aberta");
+      const aberto = barra.classList.toggle(
+        "nav-site__barra--aberta",
+      );
+
       botao.setAttribute("aria-expanded", String(aberto));
-      botao.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+
+      botao.setAttribute(
+        "aria-label",
+        aberto ? "Fechar menu" : "Abrir menu",
+      );
     });
   };
 
-  /*
-    Efeito de rolagem: a barra NÃO é fixa. Enquanto sai de vista, desliza
-    para cima, encolhe levemente e some (fade) conforme a rolagem.
-  */
+  // Efeito de rolagem.
   const ativarEfeitoRolagem = (barra) => {
     const reduzirMovimento = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     );
-    const DISTANCIA = 180; /* px de rolagem até a barra sumir por completo */
+
+    const DISTANCIA = 180;
     let aguardando = false;
 
     const atualizar = () => {
       aguardando = false;
+
       if (reduzirMovimento.matches) return;
 
-      const progresso = Math.min(window.scrollY / DISTANCIA, 1);
+      const progresso = Math.min(
+        window.scrollY / DISTANCIA,
+        1,
+      );
+
       barra.style.opacity = String(1 - progresso);
-      barra.style.transform = `translateY(${-progresso * 28}px) scale(${1 - progresso * 0.06})`;
-      barra.style.pointerEvents = progresso >= 1 ? "none" : "";
+
+      barra.style.transform =
+        `translateY(${-progresso * 28}px) ` +
+        `scale(${1 - progresso * 0.06})`;
+
+      barra.style.pointerEvents =
+        progresso >= 1 ? "none" : "";
     };
 
     window.addEventListener(
       "scroll",
       () => {
         if (aguardando) return;
+
         aguardando = true;
         window.requestAnimationFrame(atualizar);
       },
@@ -266,7 +323,7 @@
     atualizar();
   };
 
-  /* ---------- Montagem ---------- */
+  // ================= MONTAGEM DO MENU =================
 
   const montar = (host, numero) => {
     const idLinks = `menu-links-${numero}`;
@@ -282,6 +339,7 @@
         >
           ☰
         </button>
+
         <div class="nav-site__links" id="${idLinks}"></div>
       </div>
     `;
@@ -289,21 +347,23 @@
     const barra = host.querySelector(".nav-site__barra");
     const area = host.querySelector(".nav-site__links");
 
-    /* Se o host não for um <nav>, a própria barra vira a navegação */
-    const alvoAria = host.tagName === "NAV" ? host : barra;
-    if (alvoAria === barra) barra.setAttribute("role", "navigation");
+    const alvoAria =
+      host.tagName === "NAV" ? host : barra;
+
+    if (alvoAria === barra) {
+      barra.setAttribute("role", "navigation");
+    }
+
     alvoAria.setAttribute("aria-label", "Principal");
 
-    montarItens(area, null); /* começa deslogado, já com o menu na tela */
+    montarItens(area, null);
     ativarMenuMobile(barra);
     ativarEfeitoRolagem(barra);
     acompanharSessao(area);
   };
 
-  /* ==========================================================
-     VISUAL DO MENU (CSS)
-     Não fixa: rola junto com a página.
-  ========================================================== */
+  // ================= VISUAL DO MENU (CSS) =================
+
   const CSS = `
     .nav-site {
       box-sizing: border-box;
@@ -401,24 +461,28 @@
 
   const colocarCss = () => {
     if (document.getElementById("menu-site-css")) return;
+
     const estilo = document.createElement("style");
+
     estilo.id = "menu-site-css";
     estilo.textContent = CSS;
+
     document.head.appendChild(estilo);
   };
 
   const iniciar = () => {
-    /* Pode haver mais de um menu na página (ex.: um em cada tela) */
-    const hosts = document.querySelectorAll("nav.menu, [data-menu-site]");
+    const hosts = document.querySelectorAll(
+      "nav.menu, [data-menu-site]",
+    );
+
     if (!hosts.length) return;
 
     colocarCss();
 
     hosts.forEach((host, numero) => {
-      /* "menu" é só o gatilho. Troca por um nome próprio para o CSS antigo
-         das páginas (.menu, .menu a...) não interferir no menu do nav.js */
       host.classList.remove("menu");
       host.classList.add("nav-site");
+
       montar(host, numero);
     });
   };
