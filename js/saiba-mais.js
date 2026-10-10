@@ -138,13 +138,15 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Devolve o usuário logado, ou null se não houver ninguém.
-
   const obterUsuarioOuNull = async (supabase) => {
     try {
       const { data } = await supabase.auth.getSession();
       return data?.session?.user ?? null;
     } catch (erro) {
-      console.warn("Não foi possível ler a sessão, enviando como visitante:", erro);
+      console.warn(
+        "Não foi possível ler a sessão, enviando como visitante:",
+        erro,
+      );
       return null;
     }
   };
@@ -158,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       if (typeof window.obterClienteSupabase !== "function") {
         throw new Error(
-          "A função obterClienteSupabase não está disponível. Verifique o Nav.js."
+          "A função obterClienteSupabase não está disponível. Verifique o Nav.js.",
         );
       }
 
@@ -167,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const valor = (id) => document.getElementById(id).value.trim();
 
-      const { error } = await supabase.from("contatos").insert({
+      const dados = {
         user_id: user ? user.id : null, // null quando não está logado
         nome: valor("nome"),
         cpf: valor("cpf"),
@@ -175,7 +177,11 @@ document.addEventListener("DOMContentLoaded", () => {
         profissao: valor("profissao"),
         email: valor("email"),
         whatsapp: valor("whatsapp"),
-      });
+      };
+
+      console.log("Enviando:", dados);
+
+      const { error } = await supabase.from("contatos").insert(dados);
 
       if (error) throw error;
 
