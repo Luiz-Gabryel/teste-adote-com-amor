@@ -15,6 +15,11 @@
   margin: 0;
 }
 
+/* Garante que o atributo hidden esconda mesmo elementos com display definido (.btn) */
+[hidden] {
+  display: none !important;
+}
+
 html,
 body {
   width: 100%;
@@ -127,6 +132,18 @@ h1 {
   outline-offset: 3px;
 }
 
+/* Botão "Editar dados" (só para o dono da doação), no lugar do "Quero Adotar" */
+.btn--editar {
+  margin-left: 0;
+  border: 0;
+  cursor: pointer;
+  background: var(--laranja);
+}
+
+.btn--editar:hover {
+  background: #cf6a29;
+}
+
 /* Etiquetas de descrição do pet */
 .tags {
   display: flex;
@@ -206,6 +223,86 @@ section p {
   cursor: pointer;
 }
 
+/* Janela de edição */
+.dialogo-editar {
+  width: min(520px, calc(100% - 32px));
+  max-height: 90vh;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  overflow: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.dialogo-editar::backdrop {
+  background: rgba(11, 26, 43, 0.55);
+}
+
+.form-editar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px;
+}
+
+.form-editar h2 {
+  margin-bottom: 8px;
+}
+
+.form-editar label {
+  font:
+    600 13px "Montserrat",
+    sans-serif;
+  color: var(--marinho);
+}
+
+.form-editar input,
+.form-editar select,
+.form-editar textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #b5d9f3;
+  border-radius: 10px;
+  background: #d6eafa;
+  font:
+    400 15px "Lora",
+    serif;
+  color: var(--marinho);
+}
+
+.form-editar textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.msg-editar {
+  min-height: 1.2em;
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.acoes-editar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.acoes-editar .btn {
+  margin-top: 0;
+  padding: 10px 24px;
+  font-size: 16px;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn--cancelar {
+  background: #8a8a8a;
+}
+
+.btn--cancelar:hover {
+  background: #727272;
+}
+
 /* Responsividade */
 @media (max-width: 760px) {
   main {
@@ -240,4 +337,108 @@ section p {
   background-repeat: repeat;
   background-position: center top;
   background-size: 400px auto;
+}
+
+/* ================= CONHEÇA MAIS PETS ================= */
+.mais-pets {
+  width: min(1000px, calc(100% - 48px));
+  margin: 0 auto 80px;
+}
+
+.mais-pets h2 {
+  margin-bottom: 28px;
+  font:
+    800 clamp(1.6rem, 4vw, 2.4rem) "Montserrat",
+    sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.mais-pets__carrossel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mais-pets__faixa {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 20px;
+  padding: 4px 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.mais-pets__faixa::-webkit-scrollbar {
+  display: none;
+}
+
+.mais-pets__card {
+  flex: 0 0 calc((100% - 40px) / 3);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 12px;
+  background: var(--azul-tag);
+  border-radius: 22px;
+  transition: transform 0.2s;
+}
+
+.mais-pets__card:hover {
+  transform: translateY(-4px);
+}
+
+.mais-pets__card:focus-visible {
+  outline: 3px solid var(--marinho);
+  outline-offset: 3px;
+}
+
+.mais-pets__card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 0.82;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.mais-pets__card span {
+  font:
+    700 1.25rem "Montserrat",
+    sans-serif;
+  color: var(--marinho);
+}
+
+.mais-pets__seta {
+  flex: none;
+  padding: 8px;
+  border: 0;
+  background: none;
+  color: var(--laranja);
+  font:
+    800 2rem "Montserrat",
+    sans-serif;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mais-pets__seta:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+@media (max-width: 760px) {
+  .mais-pets__card {
+    flex-basis: calc((100% - 20px) / 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .mais-pets__card {
+    flex-basis: 100%;
+  }
 }

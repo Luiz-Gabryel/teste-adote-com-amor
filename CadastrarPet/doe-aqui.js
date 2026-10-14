@@ -13,11 +13,13 @@ let fotos = [];
 function ligarContador(idTextarea, idContador) {
   const ta = document.getElementById(idTextarea);
   const cont = document.getElementById(idContador);
+  if (!ta || !cont) return;
   const atualizar = () =>
     (cont.textContent = `${ta.value.length} / ${ta.maxLength}`);
   ta.addEventListener("input", atualizar);
   atualizar();
 }
+ligarContador("sobreNosPet", "contSobreNos");
 ligarContador("historiaPet", "contHistoria");
 ligarContador("cuidadosPet", "contCuidados");
 
@@ -88,7 +90,6 @@ const BUCKET = "pets-fotos";
 const TABELA = "doacoes";
 const MAX_MB = 5;
 const PAGINA_PET = "/PaginaPet/PaginaPet.html";
-
 
 let clienteSupabase = null;
 
@@ -204,6 +205,7 @@ form.addEventListener("submit", async (e) => {
     idade: form.idadePet.value.trim(),
     sexo: form.sexoPet.value,
     cor: form.corPet.value.trim(),
+    sobre_nos: form.sobreNosPet.value.trim() || null,
     historia: form.historiaPet.value.trim(),
     cuidados: form.cuidadosPet.value.trim(),
   };
@@ -217,7 +219,7 @@ form.addEventListener("submit", async (e) => {
 
     const urls = await enviarFotos(client, fotos, usuario.id);
 
-    //  devolve o id da doação que acabou de ser criada
+    // devolve o id da doação que acabou de ser criada
     const { data: nova, error } = await client
       .from(TABELA)
       .insert({
@@ -241,6 +243,7 @@ form.addEventListener("submit", async (e) => {
     form.reset();
     fotos = [];
     desenharPrevias();
+    document.getElementById("contSobreNos").textContent = "0 / 1000";
     document.getElementById("contHistoria").textContent = "0 / 1000";
     document.getElementById("contCuidados").textContent = "0 / 1000";
   } catch (err) {

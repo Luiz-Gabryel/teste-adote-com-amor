@@ -51,7 +51,6 @@ img {
   max-width: 100%;
 }
 
-
 .hero-doacao {
   position: relative;
   width: min(1100px, 100%);
@@ -141,12 +140,12 @@ img {
   grid-template-columns: 1fr 1fr;
   gap: 18px 36px;
   grid-template-areas:
-    "nome    especie"
-    "idade   especie"
-    "sexo    cor"
-    "fotos   fotos"
+    "nome     especie"
+    "idade    especie"
+    "sexo     cor"
+    "sobre    fotos"
     "historia cuidados"
-    "botao   botao";
+    "botao    botao";
 }
 
 .area-nome { grid-area: nome; }
@@ -154,6 +153,7 @@ img {
 .area-idade { grid-area: idade; }
 .area-sexo { grid-area: sexo; }
 .area-cor { grid-area: cor; }
+.area-sobre { grid-area: sobre; }
 .area-fotos { grid-area: fotos; }
 .area-historia { grid-area: historia; }
 .area-cuidados { grid-area: cuidados; }
@@ -234,6 +234,12 @@ img {
 }
 
 
+.area-sobre textarea {
+  flex: 1;
+  height: auto;
+  min-height: 190px;
+}
+
 .lista-especie {
   flex: 1;
   background: var(--azul-campo);
@@ -278,8 +284,8 @@ img {
   outline: 2px solid var(--laranja);
 }
 
-
 .upload {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -336,7 +342,6 @@ img {
   border: 2px solid #fff;
 }
 
-
 .btn-adocao {
   grid-area: botao;
   width: 100%;
@@ -380,7 +385,6 @@ img {
   border-color: #c0392b !important;
 }
 
-
 @media (max-width: 700px) {
   .form-doacao {
     grid-template-columns: 1fr;
@@ -390,12 +394,14 @@ img {
       "idade"
       "sexo"
       "cor"
+      "sobre"
       "fotos"
       "historia"
       "cuidados"
       "botao";
   }
 }
+
 .previa {
   position: relative;
 }
