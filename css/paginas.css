@@ -771,6 +771,9 @@
     margin: auto;
     max-height: 14rem;
   }
+  .doe__corpo{
+    padding: 0 0 25px;
+  }
 
   .categorias {
     gap: 0.8rem;
