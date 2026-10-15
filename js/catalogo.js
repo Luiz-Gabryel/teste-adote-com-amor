@@ -3,36 +3,37 @@
    Usa textContent (sem innerHTML) para evitar XSS. */
 (() => {
   const PASTA_ICONES = "assets/img/icones/";
-  const PASTA_AVALIACOES = "assets/img/avaliacoes/";
+  const PASTA_AVALIACOES = "";
   const PAGINA_PET = "/PaginaPet/PaginaPet.html";
   const CHAVE_RETORNO_CATALOGO = "audote-voltar-catalogo";
   const CHAVE_SCROLL_CATALOGO = "audote-scroll-catalogo";
 
   /* Só a apresentação de cada categoria. Os pets vêm do Supabase.
      "especie" é o valor gravado na coluna doacoes.especie. */
+
   const CATEGORIAS = {
     caes: {
       titulo: "Cães",
       especie: "Cachorro",
-      avaliacao: "avaliacao-caes.png",
+      avaliacao: "img/avaliacao-caes.png",
       avaliacaoAlt: "Filhote de golden retriever deitado",
     },
     gatos: {
       titulo: "Gatos",
       especie: "Gato",
-      avaliacao: "avaliacao-gatos.png",
+      avaliacao: "img/gato-avaliacao.png",
       avaliacaoAlt: "Gato listrado em pé",
     },
     coelhos: {
       titulo: "Coelhos",
       especie: "Coelho",
-      avaliacao: "avaliacao-coelhos.png",
+      avaliacao: "img/coelho-avaliacao.png",
       avaliacaoAlt: "Dois coelhos lado a lado",
     },
     calopsitas: {
       titulo: "Calopsitas",
       especie: "Calopsita",
-      avaliacao: "avaliacao-calopsitas.png",
+      avaliacao: "img/calopsita-avaliacao.png",
       avaliacaoAlt: "Calopsita de crista amarela",
     },
   };
@@ -44,7 +45,10 @@
         CHAVE_RETORNO_CATALOGO,
         `${location.pathname}${location.search}${location.hash}`,
       );
-      sessionStorage.setItem(CHAVE_SCROLL_CATALOGO, String(window.scrollY || 0));
+      sessionStorage.setItem(
+        CHAVE_SCROLL_CATALOGO,
+        String(window.scrollY || 0),
+      );
     } catch (erro) {
       console.warn("Não foi possível salvar a posição do catálogo:", erro);
     }
@@ -132,7 +136,8 @@
       .filter((p) => p.foto); // sem foto não aparece no catálogo
   }
 
-  const linkDoPet = (pet) => `${PAGINA_PET}?doacao=${encodeURIComponent(pet.id)}`;
+  const linkDoPet = (pet) =>
+    `${PAGINA_PET}?doacao=${encodeURIComponent(pet.id)}`;
 
   const tipo = new URLSearchParams(location.search).get("tipo");
   const lista = document.getElementById("lista-pets");
@@ -170,7 +175,11 @@
         }
         if (pet.sexo) {
           tags.append(
-            criarTag("tag tag--sexo", iconeDoSexo(pet.sexo), `Sexo: ${pet.sexo}`),
+            criarTag(
+              "tag tag--sexo",
+              iconeDoSexo(pet.sexo),
+              `Sexo: ${pet.sexo}`,
+            ),
           );
         }
 
@@ -219,7 +228,7 @@
     if (arte) {
       arte.addEventListener("error", () => arte.classList.add("is-ausente"));
       arte.alt = categoria.avaliacaoAlt || "";
-      arte.src = PASTA_AVALIACOES + categoria.avaliacao;
+      arte.src = "/" + categoria.avaliacao;
     }
 
     lista.append(criar("p", "catalogo__aviso", "Carregando pets..."));
